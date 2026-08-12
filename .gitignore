@@ -1,0 +1,6 @@
+venv/
+movie-frontend/
+*.zip
+.env
+__pycache__/
+*.pyc
