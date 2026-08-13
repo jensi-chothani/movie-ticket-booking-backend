@@ -46,14 +46,14 @@ def create_movie(
     db: Session = Depends(get_db),
     admin=Depends(admin_required)
 ):
+   
     new_movie = models.Movie(
-        title=movie.title,
-        description=movie.description,
-        genre=movie.genre,
-        duration=movie.duration,
-        language=movie.language,
-        poster=movie.poster
-    )
+    name=movie.name,
+    category=movie.category,
+    image=movie.image,
+    description=movie.description,
+    rating=movie.rating
+)
 
     db.add(new_movie)
     db.commit()

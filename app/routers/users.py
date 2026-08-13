@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-
+from app.routers.auth import hash_password
 from app import models
 from app.dependencies import get_db, admin_required
 
