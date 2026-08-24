@@ -30,6 +30,7 @@ app.add_middleware(
     allow_origin_regex=r"https://movie-ticket-booking-frontend.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
+    allow_origins=["*"], 
     allow_headers=["*"],
 )
 
