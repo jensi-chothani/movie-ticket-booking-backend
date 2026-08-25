@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from app.routers import (
     auth,
     movies,
@@ -15,20 +14,23 @@ from app.routers import (
     trending,
     cinemas,
     stripe_routes 
-
 )
-app = FastAPI()    
+
+app = FastAPI(redirect_slashes=False)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "http://127.0.0.1:5173",
         "https://movie-ticket-booking-frontend-tawny.vercel.app"
     ],
+    allow_origin_regex=r"https://movie-ticket-booking-frontend.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 app.include_router(movies.router, prefix="/v1")
 app.include_router(users.router, prefix="/v1")
 app.include_router(screens.router, prefix="/v1")
@@ -42,4 +44,3 @@ app.include_router(trending.router, prefix="/v1")
 app.include_router(cinemas.router, prefix="/v1")
 app.include_router(stripe_routes.router, prefix="/v1")
 app.include_router(auth.router, prefix="/v1")
-
