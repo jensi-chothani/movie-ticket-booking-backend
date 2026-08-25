@@ -17,15 +17,14 @@ from app.routers import (
     stripe_routes 
 
 )
+app = FastAPI()    
 
-app = FastAPI(redirect_slashes=False)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://127.0.0.1:5173",
+        "https://movie-ticket-booking-frontend-tawny.vercel.app"
     ],
-    allow_origin_regex=r"https://movie-ticket-booking-frontend.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
