@@ -41,7 +41,6 @@ def create_movie(
     db: Session = Depends(get_db),
     admin=Depends(admin_required)
 ):
-    # Check for duplicate movie name (case-insensitive)
     existing = db.query(models.Movie).filter(
         models.Movie.name.ilike(movie.name)
     ).first()
@@ -62,3 +61,17 @@ def create_movie(
     db.commit()
     db.refresh(new_movie)
     return new_movie
+
+# DELETE MOVIE (ADMIN ONLY)
+@router.delete("/{movie_id}")
+def delete_movie(
+    movie_id: int,
+    db: Session = Depends(get_db),
+    admin=Depends(admin_required)
+):
+    movie = db.query(models.Movie).filter(models.Movie.id == movie_id).first()
+    if not movie:
+        raise HTTPException(status_code=404, detail="Movie not found")
+    db.delete(movie)
+    db.commit()
+    return {"message": f"Movie '{movie.name}' deleted successfully"}
