@@ -9,6 +9,7 @@ router = APIRouter(
     tags=["Movies"]
 )
 
+
 @router.get("")
 def get_movies(
     page: int = 1,
@@ -34,6 +35,7 @@ def get_movies(
     )
     return movies
 
+
 # CREATE MOVIE (ADMIN ONLY)
 @router.post("")
 def create_movie(
@@ -41,4 +43,19 @@ def create_movie(
     db: Session = Depends(get_db),
     admin=Depends(admin_required)
 ):
-    existing
+    existing = (
+        db.query(models.Movie)
+        .filter(models.Movie.title == movie.title)
+        .first()
+    )
+    if existing:
+        raise HTTPException(
+            status_code=400,
+            detail="Movie with this title already exists"
+        )
+
+    new_movie = models.Movie(**movie.dict())
+    db.add(new_movie)
+    db.commit()
+    db.refresh(new_movie)
+    return new_movie
