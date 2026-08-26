@@ -19,13 +19,16 @@ from app.routers import (
 )
 
 app = FastAPI(redirect_slashes=False)
+
 Base.metadata.create_all(bind=engine)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        "https://movie-ticket-booking-frontend-tawny.vercel.app"
+        "https://movie-ticket-booking-frontend-tawny.vercel.app",
+        "https://movie-ticket-booking-frontend-btke.vercel.app"
     ],
     allow_origin_regex=r"https://movie-ticket-booking-frontend.*\.vercel\.app",
     allow_credentials=True,
