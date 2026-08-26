@@ -19,7 +19,7 @@ from app.routers import (
 )
 
 app = FastAPI(redirect_slashes=False)
-
+Base.metadata.create_all(bind=engine)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
