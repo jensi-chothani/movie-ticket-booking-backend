@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.db import Base, engine
+from app.models import *
 from app.routers import (
     auth,
     movies,
