@@ -41,37 +41,4 @@ def create_movie(
     db: Session = Depends(get_db),
     admin=Depends(admin_required)
 ):
-    existing = db.query(models.Movie).filter(
-        models.Movie.name.ilike(movie.name)
-    ).first()
-    if existing:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Movie '{movie.name}' already exists"
-        )
-
-    new_movie = models.Movie(
-        name=movie.name,
-        category=movie.category,
-        image=movie.image,
-        description=movie.description,
-        rating=movie.rating
-    )
-    db.add(new_movie)
-    db.commit()
-    db.refresh(new_movie)
-    return new_movie
-
-# DELETE MOVIE (ADMIN ONLY)
-@router.delete("/{movie_id}")
-def delete_movie(
-    movie_id: int,
-    db: Session = Depends(get_db),
-    admin=Depends(admin_required)
-):
-    movie = db.query(models.Movie).filter(models.Movie.id == movie_id).first()
-    if not movie:
-        raise HTTPException(status_code=404, detail="Movie not found")
-    db.delete(movie)
-    db.commit()
-    return {"message": f"Movie '{movie.name}' deleted successfully"}
+    existing
