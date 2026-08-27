@@ -16,7 +16,7 @@ def test_register_and_login():
 
     login_response = client.post("/v1/login", json={
         "email": "testuser_pytest@example.com",
-        "password": "TestPass123"
+        "password": " TEST_PASSWORD"
     })
 
     assert login_response.status_code == 200
