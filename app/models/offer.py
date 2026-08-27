@@ -9,16 +9,16 @@ class Offer(Base):
 
     movie_id = Column(Integer, ForeignKey("movies.id"))
 
-    title = Column(String, nullable=False)
+    title = Column(String(255), nullable=False)
 
     code = Column(
-        String,
+        String(50),
         nullable=False,
         unique=True
     )
 
     discount_value = Column(Integer, nullable=False)
 
-    discount_type = Column(String, default="percent")
+    discount_type = Column(String(20), default="percent")
 
-    status = Column(String, default="Active")
+    status = Column(String(20), default="Active")
