@@ -8,29 +8,29 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    name = Column(String, nullable=False)
+    name = Column(String(100), nullable=False)
 
     email = Column(
-        String,
+        String(150),
         unique=True,
         nullable=False
     )
 
     password = Column(
-        String,
+        String(255),
         nullable=False
     )
 
-    phone = Column(String, nullable=True)
+    phone = Column(String(20), nullable=True)
 
     role = Column(
-        String,
+        String(20),
         default="user"
     )
     # user / admin
 
     status = Column(
-        String,
+        String(20),
         default="active"
     )
 
